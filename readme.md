@@ -101,15 +101,15 @@ Ce playbook Ansible installe et configure un serveur NFS sur le groupe d’hôte
 Pour déployer notre serveur NFS (nfs_server.yml) on rentre la commande `ansible-playbook nfs_server.yml -i inventory.yml`
 
 
-**Malheureusement je n'ai pas su aller plus loin dans le TP.
+**Malheureusement je n'ai pas su aller plus loin dans le TP.**
 
-**J'ai fait énormément de recherche sur le net et consulter plusieurs documentations, mais cela n'a pas suffit.
+**J'ai fait énormément de recherche sur le net et consulter plusieurs documentations, mais cela n'a pas suffit.**
 
-**Sachez que j'ai fait tout ce que j'ai pu et que j'ai hâte de pouvoir reprendre ce sujet avec vous en classe.
+**Sachez que j'ai fait tout ce que j'ai pu et que j'ai hâte de pouvoir reprendre ce sujet avec vous en classe.**
 
-**Bien à vous,
+**Bien à vous,**
 
-**Alexandre Routier
+**Alexandre Routier**
 
 
 
