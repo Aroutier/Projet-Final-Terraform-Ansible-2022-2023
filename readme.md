@@ -36,12 +36,14 @@ Il nous faut maintenant configurer les ressources OpenStack à l'aide du script 
 
 Plus précisément, ce script crée trois types de ressources :
 
---> aire de clés : le script crée deux paires de clés nommées « Keypair_GRA11 » et « Keypair_SBG5 » en utilisant le fournisseur OpenStack « openstack.ovh » et la clé publique à partir du fichier « ~/.ssh/id_rsa.pub ».
-2.	Instance : le script crée trois instances
-•	« Instance_Backend_GRA11 » avec un compte de « var.i » et la paire de touches « Keypair_GRA11 »
-•	« Instance_Backend_SBG » avec un compte de « var.i » et la paire de touches « Keypair_SBG5 »
-•	« Instance_Front » avec un compte de 1, dans la région GRA11, et la paire de clés « Keypair_GRA11 »
-3.	Réseau : le script crée une ressource réseau privée nommée « ovh_cloud_project_network_private » avec certains attributs tels que service_name, project_id et région.
+> Deux paires de clés nommées « Keypair_GRA11 » et « Keypair_SBG5 » en utilisant le fournisseur OpenStack « openstack.ovh » et la clé publique à partir du fichier « ~/.ssh/id_rsa.pub ».
+
+> Trois instances
+•	« Instance_Backend_GRA11 » avec la clé « Keypair_GRA11 »
+•	« Instance_Backend_SBG5 » avec la clé « Keypair_SBG5 »
+•	« Instance_Front » dans la région GRA11, avec la clé « Keypair_GRA11 »
+
+> une ressource réseau privée nommée « ovh_cloud_project_network_private » avec certains attributs tels que service_name, project_id et région.
 Les instances sont connectées au réseau « Ext-Net » par défaut et au réseau privé créé. Les instances ont également un attribut « depends_on » qui fait référence à la ressource « ovh_cloud_project_network_private_subnet.subnet ».
 
 
