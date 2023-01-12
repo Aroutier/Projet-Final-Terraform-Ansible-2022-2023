@@ -50,11 +50,14 @@ Ces fichiers étant configurés, nous pouvons enfin déployer nos instances.
 
 Pour déployer nos instances on lance la commande `source ~/openrc.sh` à la racine de notre session.
 
-¨Puis, dans eductive22@master:~/tp-wordpress-eductive22/config/terraform$ , on saisit la commande `terraform apply` (on demandera de saisir la value, rentrer yes)
+¨Puis, dans eductive22@master:~/tp-wordpress-eductive22/config/terraform$ , on saisit la commande `terraform apply` (on demandera de saisir la value, rentrer yes).
 
-Afin de provisionser les machines et de se connceter en ssh, on lance la commande `ansible-playbook infrastructure_deployement.yml -i inventory.yml`
+Afin de provisionser les machines et de se connceter en ssh, on lance la commande `ansible-playbook infrastructure_deployement.yml -i inventory.yml`.
 
  Nous pouvons ajouter l'extension `--ssh-common-args='-o StrictHostKeyChecking=no'` à la commande pour autoriser automatiquement les fingerprints.
+ 
+ ![image](https://user-images.githubusercontent.com/105780244/212196350-cc6d459d-a4a6-445c-be91-ced7f9214fca.png)
+
 
 
 
