@@ -46,6 +46,22 @@ Plus précisément, ce script crée trois types de ressources :
 > Une ressource réseau privée nommée « ovh_cloud_project_network_private » avec certains attributs tels que service_name, project_id et région.
 Les instances sont connectées au réseau « Ext-Net » par défaut et au réseau privé créé. Les instances ont également un attribut « depends_on » qui fait référence à la ressource « ovh_cloud_project_network_private_subnet.subnet ».
 
+### infrastructure_deployement.yml
+
+Ce playbook Ansible exécute une série de tâches sur différents groupes d’hôtes. 
+
+> La première tâche, « Partie pour récupérer les facts du groupe1 depuis localhost », récupère des informations sur les hôtes du groupe « backend1 » et s’exécute sur le groupe d’hôtes « front ». 
+
+> La tâche suivante, « Installer et configurer une page Web de chaton », installe et configure le serveur Web Nginx sur le groupe d’hôtes « backend1 », y compris la mise à jour des référentiels de paquets, l’installation de Nginx, le démarrage du service Nginx et la configuration d’une page Web « chaton » à l’aide d’un modèle.
+
+> « Installer et configurer docker », installe et configure Docker sur le groupe d’hôtes « backend2 », y compris l’installation des paquets système requis, l’ajout de la clé apt Docker GPG, l’ajout du référentiel Docker, la mise à jour d’apt et l’installation de Docker-CE, l’installation de docker-compose et l’exécution d’un conteneur à l’aide de la commande « docker-compose up -d » dans un dossier spécifique.
+ 
+> « Partie pour récupérer les facts du groupe2 depuis localhost », est similaire à la première tâche et récupère des informations sur les hôtes du groupe « backend2 » et s’exécute sur le groupe d’hôtes « front ».
+
+> La dernière tâche, « Installer et configurer haproxy », installe et configure HAProxy sur le groupe d’hôtes « frontaux », y compris l’installation de HAProxy, la copie du fichier de configuration HAProxy à partir d’un modèle et le redémarrage du service HAProxy.
+
+
+
 Ces fichiers étant configurés, nous pouvons enfin déployer nos instances.
 
 Pour déployer nos instances on lance la commande `source ~/openrc.sh` à la racine de notre session.
@@ -55,6 +71,11 @@ Pour déployer nos instances on lance la commande `source ~/openrc.sh` à la rac
 Afin de provisionser les machines et de se connceter en ssh, on lance la commande `ansible-playbook infrastructure_deployement.yml -i inventory.yml`.
 
  Nous pouvons ajouter l'extension `--ssh-common-args='-o StrictHostKeyChecking=no'` à la commande pour autoriser automatiquement les fingerprints.
+ 
+ Nos instances sont bien montés.
+ 
+ ![image](https://user-images.githubusercontent.com/105780244/212196657-fc25255e-cca6-4b52-9594-d549367b2ac7.png)
+
  
  ![image](https://user-images.githubusercontent.com/105780244/212196350-cc6d459d-a4a6-445c-be91-ced7f9214fca.png)
 
