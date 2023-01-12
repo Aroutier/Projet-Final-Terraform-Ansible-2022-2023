@@ -1,0 +1,37 @@
+---
+front:
+  hosts:
+    ${front}:
+      ansible_user: debian
+      ansible_become: True
+
+backend1:
+  hosts:
+    ${instance_grav_first}:
+      ansible_user: debian
+      ansible_become: True
+    ${instance_sbg_first}:
+      ansible_user: debian
+      ansible_become: True
+
+backend2:
+  hosts:
+    ${instance_grav_second}:
+      ansible_user: debian
+      ansible_become: True
+    ${instance_sbg_second}:
+      ansible_user: debian
+      ansible_become: True
+
+backend3:
+  hosts:
+    ${instance_grav_third}:
+      ansible_user: debian
+      ansible_become: True
+      IpPrive: ${frontPrivée}
+    ${instance_sbg_third}:
+      ansible_user: debian
+      ansible_become: True
+      IpPrive: ${frontPrivée}
+
+

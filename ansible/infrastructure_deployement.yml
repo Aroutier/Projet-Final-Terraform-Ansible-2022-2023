@@ -1,0 +1,129 @@
+---
+- name: "Partie pour récupérer les facts du groupe1 depuis localhost"
+  hosts: front
+  any_errors_fatal: yes
+ 
+  tasks:
+  - setup:
+    delegate_to: "{{item}}"
+    delegate_facts: True
+    with_items: "{{groups.backend1}}"
+
+- name: Install and configure a kitten web page
+  hosts: backend1
+
+  vars:
+    Mon_user_eductive22: "Mon user eductive22 : le meilleur !"
+
+  tasks:
+    - name: Mise à jour des dépôts de paquets
+      apt:
+        update_cache: yes
+    - name: Ensure package nginx is installed
+      apt:
+        name: nginx
+        state: latest
+    - name: Ensure service nginx is running
+      service:
+        name: nginx
+        state: started
+    - name: Configure Kitten Page
+      template:
+        src: templates/index.html
+        dest: /var/www/html/index.html 
+ 
+- name: Install and configure docker
+  hosts: backend2
+  tasks:
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+
+    - name: Installation docker-compose
+      apt:
+        name:
+          - docker-compose
+          - docker-compose-plugin
+        state: present 
+
+    - name: run docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: ifconfig.io
+      copy:
+        src: templates/ifconfig.io
+        dest: /home/debian/
+
+    - name: Run container
+      become: True
+      shell:
+        cmd: "docker-compose up -d "
+        chdir: /home/debian/ifconfig.io/
+
+- name: "Partie pour récupérer les facts du groupe2 depuis localhost"
+  hosts: front
+  any_errors_fatal: yes
+ 
+  tasks:
+  - setup:
+    delegate_to: "{{item}}"
+    delegate_facts: True
+    with_items: "{{groups.backend2}}"
+
+- name: Install and configure haproxy
+  hosts: front
+  become: true
+  tasks:
+    - name: Install Haproxy
+      apt:
+        name: haproxy
+        state: present     
+    - name: Copy Haproxy Configuration file
+      template:
+        src: templates/haproxy.cfg
+        dest: /etc/haproxy/haproxy.cfg 
+    - name: Restart service
+      service:
+        name: haproxy
+        state: restarted      
+
+
+
