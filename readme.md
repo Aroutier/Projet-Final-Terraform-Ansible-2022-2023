@@ -28,7 +28,7 @@ Ces variables sont utilisées dans le script Terraform pour définir des ressour
 ### inventory.tmpl
 
 Dorénavant, il nous faut spécifier un groupe d’hôtes et les informations de connexion pour chaque hôtes dans le fichier d’inventaire Ansible **inventory.tmpl**.
-Les groupes sont « front », « backend1 », « backend2 » et « backend3 ». Au sein de chaque groupe, il existe plusieurs hôtes définis à l’aide de variables telles que ${front}, ${instance_grav_first} et ${instance_sbg_first}. Les informations de connexion pour chaque hôtes incluent le nom d’utilisateur (debian) et s’il faut utiliser become (True) pour exécuter les commandes avec des privilèges élevés. De plus, le groupe « backend3 » a une variable IpPrive avec ${frontPrivée} qui va être utilisée dans les playbooks.
+Les groupes sont « front », « backend1 », « backend2 » et « backend3 ». Au sein de chaque groupe, il existe plusieurs hôtes définis à l’aide de variables telles que `${front}`, `${instance_grav_first}` et `${instance_sbg_first}`. Les informations de connexion pour chaque hôtes incluent le nom d’utilisateur (debian) et s’il faut utiliser become (True) pour exécuter les commandes avec des privilèges élevés. De plus, le groupe « backend3 » a une variable IpPrive avec `${frontPrivée}` qui va être utilisée dans les playbooks.
 
 ### Myprojet.tf
 
