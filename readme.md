@@ -32,7 +32,7 @@ Les groupes sont « front », « backend1 », « backend2 » et « backend3 ». 
 
 ### Myprojet.tf
 
-Il nous faut maintenant configurer les ressources OpenStack à l'aide du script Terraform **Myprojet.tf**. 
+Il nous faut maintenant configurer les ressources OpenStack à l'aide du script Terraform **Myprojet.tf**, dans lequel je définis comment deployer nos instances. 
 
 Plus précisément, ce script crée trois types de ressources :
 
@@ -43,8 +43,18 @@ Plus précisément, ce script crée trois types de ressources :
 •	« Instance_Backend_SBG5 » avec la clé « Keypair_SBG5 »
 •	« Instance_Front » dans la région GRA11, avec la clé « Keypair_GRA11 »
 
-> une ressource réseau privée nommée « ovh_cloud_project_network_private » avec certains attributs tels que service_name, project_id et région.
+> Une ressource réseau privée nommée « ovh_cloud_project_network_private » avec certains attributs tels que service_name, project_id et région.
 Les instances sont connectées au réseau « Ext-Net » par défaut et au réseau privé créé. Les instances ont également un attribut « depends_on » qui fait référence à la ressource « ovh_cloud_project_network_private_subnet.subnet ».
+
+Ces fichiers étant configurés, nous pouvons enfin déployer nos instances.
+
+Pour déployer nos instances on lance la commande `source ~/openrc.sh` à la racine de notre session.
+
+¨Puis, dans eductive22@master:~/tp-wordpress-eductive22/config/terraform$ , on saisit la commande `terraform apply` (on demandera de saisir la value, rentrer yes)
+
+Afin de provisionser les machines et de se connceter en ssh, on lance la commande `ansible-playbook infrastructure_deployement.yml -i inventory.yml`
+
+ Nous pouvons ajouter l'extension `--ssh-common-args='-o StrictHostKeyChecking=no'` à la commande pour autoriser automatiquement les fingerprints.
 
 
 
