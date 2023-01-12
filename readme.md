@@ -78,6 +78,40 @@ Afin de provisionser les machines et de se connceter en ssh, on lance la command
 
  
  ![image](https://user-images.githubusercontent.com/105780244/212196350-cc6d459d-a4a6-445c-be91-ced7f9214fca.png)
+ 
+ 
+ ## Niveau 2
+ 
+ A présent nous devons déployer le serveur NFS.
+ 
+ ### nfs_server.yml
+ 
+Ce playbook Ansible installe et configure un serveur NFS sur le groupe d’hôtes « frontaux ».
+
+> Tout d'abord on installe les paquets nécessaires pour le serveur NFS (nfs-kernel-server et nfs-common) à l’aide du module apt.
+
+> Ensuite on démarre le service serveur NFS à l’aide du module de service.
+
+> Par la suite on crée un répertoire appelé « wordpress-data » dans le répertoire / home / à l’aide du module de fichiers.
+
+> On met à jour le fichier d’exportation en utiliante le module lineinfile pour ajouter une ligne au fichier /etc/exports qui exporte le répertoire /home/wordpress-data avec des autorisations de lecture-écriture et des options spécifiques (no_root_squash, anonuid, anongid, sync) vers la plage IP de 192.168.22.0/255.255.255.0.
+
+> Pour finir on redémarre le serveur NFS à l’aide du module de service.
+
+Pour déployer notre serveur NFS (nfs_server.yml) on rentre la commande `ansible-playbook nfs_server.yml -i inventory.yml`
+
+
+**Malheureusement je n'ai pas su aller plus loin dans le TP.
+
+**J'ai fait énormément de recherche sur le net et consulter plusieurs documentations, mais cela n'a pas suffit.
+
+**Sachez que j'ai fait tout ce que j'ai pu et que j'ai hâte de pouvoir reprendre ce sujet avec vous en classe.
+
+**Bien à vous,
+
+**Alexandre Routier
+
+
 
 
 
